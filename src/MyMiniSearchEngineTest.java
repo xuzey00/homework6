@@ -23,7 +23,7 @@ public class MyMiniSearchEngineTest {
         MyMiniSearchEngine engine = new MyMiniSearchEngine(documents());
         List<Integer> result = engine.search("seattle");
 
-        assertEquals(1, result.size());
+        assertEquals(1, result.size());//appearance, "seattle" only show up once
 
         assertEquals(Integer.valueOf(4), result.get(0));
     }
