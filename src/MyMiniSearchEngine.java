@@ -30,11 +30,19 @@ public class MyMiniSearchEngine {
         //List<Integer> num = new ArrayList<Integer>();
         int i = 0;
         for(String text : texts){
-            List<Integer> num = new ArrayList<Integer>();
-            String[] words = texts.get(i).split(" ");
-            num.add(words.length);
-            count.add(num);
-            indexes.put(Arrays.toString(words), count);
+            String[] words = texts.get(i).split(" "); // "hello", "world"
+            //List<Integer> num = new ArrayList<Integer>();
+            for(int x = 0; x<words.length;x++){
+                if(indexes.containsKey(words[x].toString())){
+
+                }else{
+                    List<Integer> num = new ArrayList<Integer>();
+                    num.add(x);
+                    count.add(num);
+                    indexes.put(words[x].toString(),count);
+                }
+            }
+            //indexes.put(Arrays.toString(words), count);
             i++;
         }
         System.out.println(indexes);
