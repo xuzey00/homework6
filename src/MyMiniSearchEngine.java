@@ -27,10 +27,13 @@ public class MyMiniSearchEngine {
         System.out.println(map);*/
         indexes = new HashMap<>();
         List<List<Integer>> count = new ArrayList<List<Integer>>();
-        List<Integer> num = new ArrayList<Integer>();
+        //List<Integer> num = new ArrayList<Integer>();
         int i = 0;
         for(String text : texts){
+            List<Integer> num = new ArrayList<Integer>();
             String[] words = texts.get(i).split(" ");
+            num.add(words.length);
+            count.add(num);
             indexes.put(Arrays.toString(words), count);
             i++;
         }
