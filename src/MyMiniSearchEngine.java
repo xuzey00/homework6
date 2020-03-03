@@ -17,36 +17,30 @@ public class MyMiniSearchEngine {
     // assume documents only contain alphabetical words separated by white spaces.
     private void index(List<String> texts) {
         //homework
-        /*Map<String, Integer> map = new HashMap<String, Integer>();
-        // use i as index
-        int i = 0;
-        for(String text : texts){
-            map.put(text, i);
-            i++;
-        }
-        System.out.println(map);*/
         indexes = new HashMap<>();
         List<List<Integer>> count = new ArrayList<List<Integer>>();
         //List<Integer> num = new ArrayList<Integer>();
         int i = 0;
         for(String text : texts){
-            String[] words = texts.get(i).split(" "); // "hello", "world"
-            //List<Integer> num = new ArrayList<Integer>();
-            for(int x = 0; x<words.length;x++){
+            String[] words = texts.get(i).split(" "); //doc 0:"hello", "world"  doc 1:"hello"  doc 2:"world"
+            List<Integer> num = new ArrayList<Integer>();
+            List<Integer> doc = new ArrayList<Integer>();
+            doc.add(i);
+            for(int x = 0; x<words.length; x++){
+                //List<Integer> num = new ArrayList<Integer>();
                 if(indexes.containsKey(words[x].toString())){
+                    //add to the same array list
+
 
                 }else{
-                    List<Integer> num = new ArrayList<Integer>();
-                    num.add(x);
-                    count.add(num);
                     indexes.put(words[x].toString(),count);
                 }
             }
-            //indexes.put(Arrays.toString(words), count);
+            count.add(num);
             i++;
         }
         System.out.println(indexes);
-        System.out.println(indexes.get("hello"));
+        //System.out.println(indexes.get("hello"));
     }
 
     // search(key) return all the document ids where the given key phrase appears.
@@ -56,7 +50,7 @@ public class MyMiniSearchEngine {
         // homework
         // goes through the map, use map.containKey(keyPhrase) to locate the value
         // return with map.get()
-
+        List<List<Integer>> result = new ArrayList<>();
         return new ArrayList<>(); // place holder
     }
 }
