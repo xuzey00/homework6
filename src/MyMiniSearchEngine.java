@@ -7,20 +7,28 @@ public class MyMiniSearchEngine {
         private int docNum;
         private ArrayList<Integer> loc;
 
-        public List<Integer> wordIndex(int n){
+        public wordIndex(int n){
             docNum = n;
             loc = new ArrayList<>();
-            return loc;
         }
+        public int getDocNum(){
+            return docNum;
+        }
+
         public void AddLocation(int location){
             loc.add(location);
         }
+
+        public ArrayList<Integer> getLocation(){
+            return loc;
+        }
+
         @Override
         public String toString(){
             return "{doc"+ docNum + ", location" + loc.toString() + "}";
         }
     }
-    private Map<String, List<List<Integer>>> indexes;
+    private Map<String, List<wordIndex>> indexes;
 
     // disable default constructor
     private MyMiniSearchEngine() {
@@ -34,20 +42,28 @@ public class MyMiniSearchEngine {
     // assume documents only contain alphabetical words separated by white spaces.
     private void index(List<String> texts) {
         //homework
-        indexes = new HashMap<>();
-        //List<List<Integer>> count = new ArrayList<List<Integer>>();
+        indexes = new HashMap<String, List<wordIndex>>();
         int docNum = 0;
         for(String text : texts){
             String[] words = text.split(" "); //doc 0:"hello", "world"  doc 1:"hello"  doc 2:"world"  ...
             for(int x = 0; x<words.length; x++){
+                List<wordIndex> docList;
+                wordIndex numList;
                 String word = words[x].toLowerCase();
                 if(!indexes.containsKey(word)){
-                    indexes.put(word, new ArrayList<>());
+                    docList = new ArrayList<>();
+                    indexes.put(word, docList);
                 }else if(indexes.get(word).get(docNum) == null){
-                    wordIndex index = new wordIndex();
-                    indexes.get(word).add(index.wordIndex(docNum));
+                    docList = indexes.get(word);
                 }
-                indexes.get(word).get(docNum).AddLocation(x);
+                if (docList.IsEmpty() || docList.get(docList.size()-1).getDocNum() != docNum) {
+                    numList = new wordIndex(docNum);
+                    docList.add(numList);
+                }
+                else {
+                    numList = docList.get(docList.size() - 1);
+                }
+
             }
             docNum++;
         }
