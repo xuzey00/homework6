@@ -18,26 +18,23 @@ public class MyMiniSearchEngine {
     private void index(List<String> texts) {
         //homework
         indexes = new HashMap<>();
-        List<List<Integer>> count = new ArrayList<List<Integer>>();
-        //List<Integer> num = new ArrayList<Integer>();
-        int i = 0;
+        //List<List<Integer>> count = new ArrayList<List<Integer>>();
+        int docNum = 0;
         for(String text : texts){
-            String[] words = texts.get(i).split(" "); //doc 0:"hello", "world"  doc 1:"hello"  doc 2:"world"
-            List<Integer> num = new ArrayList<Integer>();
-            List<Integer> doc = new ArrayList<Integer>();
-            doc.add(i);
+            String[] words = texts.get(docNum).split(" "); //doc 0:"hello", "world"  doc 1:"hello"  doc 2:"world"  ...
+            int j = 0;
+            List<List<Integer>> index;
             for(int x = 0; x<words.length; x++){
-                //List<Integer> num = new ArrayList<Integer>();
-                if(indexes.containsKey(words[x].toString())){
-                    //add to the same array list
-
-
+                index = indexes.get(words[x]);
+                if(index.isEmpty()){
+                    index = new ArrayList<>();
                 }else{
-                    indexes.put(words[x].toString(),count);
+                    index.get(j).add(x);
                 }
+                indexes.put(words[x],index);
+                j++;
             }
-            count.add(num);
-            i++;
+            docNum++;
         }
         System.out.println(indexes);
         //System.out.println(indexes.get("hello"));
