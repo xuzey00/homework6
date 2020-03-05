@@ -3,6 +3,23 @@ import java.util.*;
 public class MyMiniSearchEngine {
     // default solution. OK to change.
     // do not change the signature of index()
+    class wordIndex{
+        private int docNum;
+        private ArrayList<Integer> loc;
+
+        public List<Integer> wordIndex(int n){
+            docNum = n;
+            loc = new ArrayList<>();
+            return loc;
+        }
+        public void AddLocation(int location){
+            loc.add(location);
+        }
+        @Override
+        public String toString(){
+            return "{doc"+ docNum + ", location" + loc.toString() + "}";
+        }
+    }
     private Map<String, List<List<Integer>>> indexes;
 
     // disable default constructor
@@ -21,18 +38,16 @@ public class MyMiniSearchEngine {
         //List<List<Integer>> count = new ArrayList<List<Integer>>();
         int docNum = 0;
         for(String text : texts){
-            String[] words = texts.get(docNum).split(" "); //doc 0:"hello", "world"  doc 1:"hello"  doc 2:"world"  ...
-            int j = 0;
-            List<List<Integer>> index;
+            String[] words = text.split(" "); //doc 0:"hello", "world"  doc 1:"hello"  doc 2:"world"  ...
             for(int x = 0; x<words.length; x++){
-                index = indexes.get(words[x]);
-                if(index.isEmpty()){
-                    index = new ArrayList<>();
-                }else{
-                    index.get(j).add(x);
+                String word = words[x].toLowerCase();
+                if(!indexes.containsKey(word)){
+                    indexes.put(word, new ArrayList<>());
+                }else if(indexes.get(word).get(docNum) == null){
+                    wordIndex index = new wordIndex();
+                    indexes.get(word).add(index.wordIndex(docNum));
                 }
-                indexes.put(words[x],index);
-                j++;
+                indexes.get(word).get(docNum).AddLocation(x);
             }
             docNum++;
         }
