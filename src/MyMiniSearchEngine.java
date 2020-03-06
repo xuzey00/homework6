@@ -101,6 +101,7 @@ public class MyMiniSearchEngine {
                 System.out.println("key:["+keys[i]+"],result["+result+"]"+num + location);
             }
         }
+
         System.out.println(finalResult);
         // return empty list, no words being found
         return Collections.emptyList();
